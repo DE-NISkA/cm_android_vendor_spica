@@ -1,0 +1,26 @@
+NAME
+    glVaryingInterpolationEXP - select interpolation mode for varying variables
+
+C SPECIFICATION
+    void glVaryingInterpolationEXP(const char* name, GLenum mode)
+
+PARAMETERS
+    name    Specifies the name of the varying for hich the interpolation mode is to be changed
+    mode    Specifies a symbolic value representing the interpolation mode - accepts GL_FLAT or GL_SMOOTH
+
+DESCRIPTION
+
+    This controls the interpolation of the varyings for the program object that was made part of the current state by calling glUseProgram. The interpolation mode for all active varying variables in a program is set to GL_SMOOTH upon successful linking of the program. If the varying specified by name is not active in the current program then this command has no effect. The interpolation state for the varying is retained until the next successful link operation occurs on the program object, when they are once again initialized to GL_SMOOTH.
+    
+    
+ERRORS
+
+GL_INVALID_OPERATION is generated if there is no current program object
+GL_INVALID_ENUM is generated if mode is not GL_SMOOTH or GL_FLAT
+
+ASSOCIATED GETS
+
+//TODO :
+
+
+//TODO: this is not a proper extension specification, just a standard api specification format 

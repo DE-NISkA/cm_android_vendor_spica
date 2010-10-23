@@ -1,0 +1,67 @@
+1 ) GLboolean GLES2Initdriver(void);
+    This function is used to initialize the 3D Hardware and pool memory. The function returns “GL_TRUE” on success or “GL_FALSE” if it fails to initialize. 
+        
+
+2)  GLES2Context GLES2CreateContext(GLES2Context sharedctx);
+    This function is used to create the graphics context in library. The function returns “GLES2Context”.
+    
+    The function create the graphics context in GLES library and returns the pointer to graphics context.
+    If sharedctx is not GLES_NO_CONTEXT, its textures will be shared with the newly created context.
+
+
+3)  GLboolean GLES2DestroyContext(GLES2Context ctx);
+    This function is used to destroy the graphics context.
+        
+    This function delete the graphics context and return GL_TRUE on success and GL_FALSE if it fails to delete the context.
+  
+  
+4)  GLES2Context GLES2SetContext(GLES2Context ctx);
+    This function sets the present graphics context with ctx.
+    
+    The function sets the present graphics context with ctx and returns the previous graphics context.
+
+
+5)  void GLES2BindTexImage( const GLES2SurfaceData* pSurfData , GLenum target, GLint level , GLuint isMipmapped);
+    This function is used for defining externally managed texture. 
+    
+    pSurfData describes an externally stored buffer to be used as a texture in OpenGL. The contents of the texture data should be stored in a physically contiguous manner otherwise the results are undefined.
+    pSurfData nativeColorFormat should be specified using native format. Must be one of :E_ARGB8, E_ARGB4, E_ARGB1555, E_RGB565.
+    width and height of the image also need to be specified in pSurfData .
+
+    target has to be GL_TEXTURE_2D .
+    level= 0: Right now only level 0 can be supported. All mipmaps defined together at level 0 can be supported later on.
+    isMipmapped : for the case when all mipmap level are specified together it is 1. Right now only non-mipmapped (value 0) is supported.
+
+
+6)  void GLES2ReleaseTexImage(const GLES2SurfaceData* pSurfData );
+    This function is used to release the externally managed texture.
+    
+    - pSurfData  is a pointer to GLES2SurfaceData.
+
+
+7) GLboolean GLES2SetSurfaceData(GLES2SurfaceData * surfdata);
+   This Function is used to set the surface data in library. The function takes surface data structure “GLES2SurfaceData” as input.   
+
+   ISSUES: GL specifies that the viewport (and other GL state like scissor) width and height has to be set to that of the surface dimensions when the context is initialized. Here we plan to do it whenever a surface is attached. TO BE CHECKED if this is correct behaviour or not.
+
+
+8)  GLboolean GLES2SwapBuffer(void);
+    This function is used to notify the library about the BufferSwap.
+
+    Calling this will swap the buffers in the surface that is attached to GL. Returns false if no valid surface is bound to the context.
+
+
+9)  BufferHandle BufferAlloc(GLsizei size);
+    This is a function for allocating physically contiguous memory buffer from the graphics pool memory. This should be used to create the depthstencil buffer.
+ 
+   
+10) GLboolean BufferFree(BufferHandle handle);
+    This function frees a previously allocated buffer using BufferAlloc
+
+
+
+11) BufferAddress GetBufferAddress(BufferHandle handle);
+    This function gets the physical and virtual address of previously allocated buffer using BufferAlloc
+        
+    Note : BufferAddress has been changed from pointer type to struct type.
+
