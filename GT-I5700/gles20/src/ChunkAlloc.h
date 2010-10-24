@@ -49,10 +49,11 @@ public:
 	ChunkHandle* New(unsigned int size);
 	void Free(ChunkHandle* ch); 
 
-	
+#ifdef CACHE_MEM
 	int cache_clean_invalid (void *addr, int size);
 	int cache_clean         (void *addr, int size);
 	int cache_invalid       (void *addr, int size);
+#endif
 };
 
 /*

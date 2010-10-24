@@ -108,7 +108,7 @@ ChunkHandle::~ChunkHandle()
 /*------------------------------------------------------------------------*//*!
 * BufferManager class
 *//*-------------------------------------------------------------------------*/
-
+#ifdef CACHE_MEM
 int BufferManager::cache_invalid(void *addr, int size)
 {
 	struct pmem_mem_alloc alloc_desc;
@@ -153,7 +153,7 @@ int BufferManager::cache_clean_invalid(void *addr, int size)
 
 return 0;
 }
-
+#endif
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 BufferManager::BufferManager()
